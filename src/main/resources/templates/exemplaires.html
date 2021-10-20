@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="container">
+<table th:each="ex : ${exemplaires}" class="table">
+    <thead>
+        <th>Oeuvre</th>
+        <th>Etat</th>
+    </thead>
+    <tr>
+        <td th:text="'oeuvre : ' + ${ex.getOeuvre().getNom()}"/>
+        <td th:text="'état : ' + ${ex.getEtat()}"/>
+    </tr>
+</table>
+
+<form th:object="${exemplaire}" th:action="@{./create}" method="post" action="#">
+    <label>Oeuvre : </label>
+    <select th:field="*{oeuvre}">
+        <option value="-1">-----</option>
+        <option th:each="oeuvre : ${oeuvres}"
+                th:value="${oeuvre.getIdOeuvre()}"
+                th:text="${oeuvre.getNom()}"></option>
+    </select>
+
+    </br>
+    </br>
+    <label>Etat : </label>
+    <input type="text" name="etat" th:field="*{etat}">
+    <input name="créer" type="submit">
+</form>
+
+<a href="../oeuvres/">Page des oeuvres</a>
+</body>
+</html>

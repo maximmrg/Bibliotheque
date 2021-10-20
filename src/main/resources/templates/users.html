@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Utilisateurs</title>
+</head>
+<body>
+<h1>Utilisateurs</h1>
+    <table th:each="user: ${users}">
+    <tr>
+        <td th:text="${user.getNom()}"/>
+        <td th:text="${user.getPrenom()}" />
+    </tr>
+    </table>
+
+<h3>Créer nouvel utilisateur</h3>
+<form th:action="@{./create}" method="POST" th:object="${user}"  action="#">
+    Nom : <input type="text" name="nom" th:field="*{nom}" />
+    Prenom : <input type="text" name="prenom" th:field="*{prenom}"/>
+    <input type="submit" value="Créer" />
+</form>
+
+<a href="../oeuvres/">Page des oeuvres</a>
+</body>
+</html>

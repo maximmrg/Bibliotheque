@@ -6,16 +6,16 @@ import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/users")
 @ExposesResourceFor(User.class)
 public class UserController {
 
@@ -25,10 +25,15 @@ public class UserController {
         this.ur = ur;
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllUsers(){
-        Iterable<User> allIntervenants = ur.findAll();
-        return ResponseEntity.ok(allIntervenants);
+    @GetMapping
+    public String getAllUsers(Model model) {
+        //Model model;
+        model.addAttribute("user", new User());
+        Iterable<User> allUsers = ur.findAll();
+
+        model.addAttribute("users", allUsers);
+
+        return "users";
     }
 
     @GetMapping(value="/{userId}")
@@ -37,14 +42,19 @@ public class UserController {
                 .map(i -> ResponseEntity.ok(i.get()))
                 .orElse(ResponseEntity.notFound().build());
     }
-    
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user){
-        User user2Save = new User(user.getNom(), user.getPrenom());
 
-        User saved = ur.save(user2Save);
 
-        URI location = linkTo(UserRepository.class).slash(saved.getIdUser()).toUri();
-        return ResponseEntity.created(location).build();
+    @PostMapping("/create")
+    public String createUser(@ModelAttribute User user,  Model model){
+        model.addAttribute("user", new User());
+
+
+        ur.save(user);
+
+        Iterable<User> allUsers = ur.findAll();
+
+        model.addAttribute("users", allUsers);
+
+        return "users";
     }
 }

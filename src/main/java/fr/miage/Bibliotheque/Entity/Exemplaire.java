@@ -18,12 +18,14 @@ public class Exemplaire implements Serializable {
     private long idExemplaire;
 
     private String etat;
+    private boolean isDispo;
 
     @ManyToOne
     private Oeuvre oeuvre;
 
-    public Exemplaire(String etat, Oeuvre oeuvre) {
+    public Exemplaire(String etat, boolean isDispo, Oeuvre oeuvre) {
         this.etat = etat;
+        this.isDispo = isDispo;
         this.oeuvre = oeuvre;
     }
 
@@ -49,5 +51,13 @@ public class Exemplaire implements Serializable {
 
     public void setOeuvre(Oeuvre oeuvre) {
         this.oeuvre = oeuvre;
+    }
+
+    public boolean isDispo() {
+        return isDispo;
+    }
+
+    public void setDispo(boolean dispo) {
+        isDispo = dispo;
     }
 }

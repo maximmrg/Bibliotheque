@@ -3,7 +3,6 @@ package fr.miage.Bibliotheque.Controller;
 import fr.miage.Bibliotheque.Component.UserRepository;
 import fr.miage.Bibliotheque.Entity.User;
 import org.springframework.hateoas.server.ExposesResourceFor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
-import java.net.URI;
 import java.util.Optional;
 
 @Controller

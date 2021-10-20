@@ -44,10 +44,11 @@ public class ExemplaireController {
     }
 
     @PostMapping("/create")
-    public String cerateExemplaire(@ModelAttribute Exemplaire exemplaire, Model model){
+    public String createExemplaire(@ModelAttribute Exemplaire exemplaire, Model model){
         model.addAttribute("exemplaire", new Exemplaire());
         if(exemplaire.getOeuvre() != null && !exemplaire.getEtat().isEmpty()){
             if(exemplaire.getOeuvre().getIdOeuvre()!=-1)
+                exemplaire.setDispo(true);
             er.save(exemplaire);
 
         }

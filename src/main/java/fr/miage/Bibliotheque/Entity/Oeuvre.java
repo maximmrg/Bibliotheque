@@ -20,6 +20,7 @@ public class Oeuvre implements Serializable {
     private long idOeuvre;
 
     private String nom;
+    private int nbResa;
 
     public Oeuvre(String nom) {
         this.nom = nom;
@@ -39,5 +40,13 @@ public class Oeuvre implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public int getNbResa() {
+        return nbResa;
+    }
+
+    public void setNbResa(int nbResa) {
+        this.nbResa = nbResa;
     }
 }

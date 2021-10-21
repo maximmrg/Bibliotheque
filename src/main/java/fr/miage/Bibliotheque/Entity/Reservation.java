@@ -30,9 +30,9 @@ public class Reservation implements Serializable {
     @OneToOne
     private Oeuvre oeuvre;
 
-    public Reservation(Date dateReservation, Boolean enCours, User user, Oeuvre oeuvre) {
+    public Reservation(Date dateReservation, User user, Oeuvre oeuvre) {
         this.dateReservation = dateReservation;
-        this.enCours = enCours;
+        this.enCours = true;
         this.user = user;
         this.oeuvre = oeuvre;
     }

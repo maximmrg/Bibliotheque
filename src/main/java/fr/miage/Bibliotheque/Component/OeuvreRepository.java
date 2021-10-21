@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OeuvreRepository extends JpaRepository<Oeuvre, Long> {
+public interface OeuvreRepository extends JpaRepository<Oeuvre, Long>{
 
     @Query("select o from Oeuvre o where o.nom = ?1")
     public Oeuvre findByNom(String name);

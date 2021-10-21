@@ -2,6 +2,7 @@ package fr.miage.Bibliotheque.Controller;
 
 import fr.miage.Bibliotheque.Component.EmpruntRepository;
 import fr.miage.Bibliotheque.Component.ExemplaireRepository;
+import fr.miage.Bibliotheque.Component.OeuvreRepository;
 import fr.miage.Bibliotheque.Component.UserRepository;
 import fr.miage.Bibliotheque.Entity.Emprunt;
 import fr.miage.Bibliotheque.Entity.Exemplaire;
@@ -12,17 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping(value = "/emprunts")
 @ExposesResourceFor(Emprunt.class)
 public class EmpruntController {
 
     private final EmpruntRepository er;
+    private final OeuvreRepository or;
     private final ExemplaireRepository exr;
     private final UserRepository ur;
 
-    public EmpruntController(EmpruntRepository er, ExemplaireRepository exr, UserRepository ur) {
+    public EmpruntController(EmpruntRepository er, OeuvreRepository or, ExemplaireRepository exr, UserRepository ur) {
         this.er = er;
+        this.or = or;
         this.exr = exr;
         this.ur = ur;
     }
@@ -39,8 +44,17 @@ public class EmpruntController {
 
     @PostMapping("/create")
     public String createEmprunt(@RequestParam(value = "nomUser") String nomUser, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model){
-        User user = ur.findByNom(nomUser);
-        Exemplaire exemplaire = exr.findByOeuvre_NomAndAndDispo(nomOeuvre);
+        Oeuvre oeuvre = or.findByNom(nomOeuvre);
+        if(oeuvre != null) {
+            Exemplaire exemplaire = exr.findByOeuvreAndAndDispo(oeuvre);
+
+            User user = ur.findByNom(nomUser);
+
+            if (user != null && exemplaire != null) {
+                Emprunt emprunt = new Emprunt(new Date(), user, exemplaire);
+                er.save(emprunt);
+            }
+        }
 
         return "emprunts";
     }

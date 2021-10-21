@@ -9,42 +9,84 @@
 </head>
 
 <body class="container">
-<table class="table">
-    <thead>
+<nav class="navbar">
+<div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="/oeuvres/" class="nav-link">Oeuvres</a>
+        </li>
+        <li class="nav-item">
+            <a href="/exemplaires/" class="nav-link">Exemplaire</a>
+        </li>
+        <li class="nav-item">
+            <a href="/users/" class="nav-link">Utilisateurs</a>
+        </li>
+        <li class="nav-item">
+            <a href="/emprunts/" class="nav-link">Emprunts</a>
+        </li>
+        <li class="nav-item">
+            <a href="/reservations/" class="nav-link">Reservations</a>
+        </li>
+    </ul>
+</div>
+</nav>
+
+<h1>Exemplaires</h1>
+
+
+<div class="border container p-3">
+    <!--<form th:object="${exemplaire}" th:action="@{./create}" method="post" action="#">
+        <label>Oeuvre : </label>
+        <select th:field="*{oeuvre}">
+            <option value="-1">-&#45;&#45;&#45;&#45;</option>
+            <option th:each="oeuvre : ${oeuvres}"
+                    th:value="${oeuvre.getIdOeuvre()}"
+                    th:text="${oeuvre.getNom()}"></option>
+        </select>
+
+        </br>
+        </br>
+        <label>Etat : </label>
+        <select th:field="*{etat}">
+            <option value="Neuf">Neuf</option>
+            <option value="Usé">Usé</option>
+        </select>
+
+        </br>
+        </br>
+
+        <input name="créer" type="submit">
+    </form>-->
+
+    <form th:action="@{./create}" method="post" action="#">
+        <input type="text" th:name="nomOeuvre" placeholder="oeuvre">
+
+        </br>
+        </br>
+        <label>Etat : </label>
+        <select th:name="etat">
+            <option value="Neuf">Neuf</option>
+            <option value="Usé">Usé</option>
+        </select>
+
+        </br>
+
+        <input type="submit" value="Créer">
+    </form>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
         <th>Oeuvre</th>
         <th>Etat</th>
-    </thead>
-    <tr th:each="ex : ${exemplaires}">
-        <td th:text="${ex.getOeuvre().getNom()}"/>
-        <td th:text="${ex.getEtat()}"/>
-    </tr>
-</table>
-
-<form th:object="${exemplaire}" th:action="@{./create}" method="post" action="#">
-    <label>Oeuvre : </label>
-    <select th:field="*{oeuvre}">
-        <option value="-1">-----</option>
-        <option th:each="oeuvre : ${oeuvres}"
-                th:value="${oeuvre.getIdOeuvre()}"
-                th:text="${oeuvre.getNom()}"></option>
-    </select>
-
-    </br>
-    </br>
-    <label>Etat : </label>
-    <select th:field="*{etat}">
-        <option value="Neuf">Neuf</option>
-        <option value="Usé">Usé</option>
-    </select>
-
-    </br>
-    </br>
-
-    <input name="créer" type="submit">
-</form>
-
-<a href="../oeuvres/">Page des oeuvres</a>
-<a href="../emprunts/">Emprunter un exemplaire</a>
+        </thead>
+        <tr th:each="ex : ${exemplaires}">
+            <td th:text="${ex.getOeuvre().getNom()}"/>
+            <td th:text="${ex.getEtat()}"/>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>

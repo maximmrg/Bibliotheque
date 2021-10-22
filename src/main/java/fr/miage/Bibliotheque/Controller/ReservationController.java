@@ -44,12 +44,28 @@ public class ReservationController {
     @PostMapping("/create")
     public String createReservation(@RequestParam(value = "nomUser") String nomUser, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model) {
         User user = uR.findByNom(nomUser);
-        Oeuvre oeuvre = oR.findByNom(nomOeuvre);
+        Oeuvre oeuvre = oR.findByNom(nomOeuvre).stream().findFirst().orElse(null);
 
         if(user != null && oeuvre != null){
+            int nbResa = oeuvre.getNbResa();
+            oeuvre.setNbResa(nbResa +=1);
             Reservation reservation = new Reservation(new Date(), user, oeuvre);
             resR.save(reservation);
+            oR.save(oeuvre);
         }
+
+        Iterable<Reservation> allReservations = resR.findAll();
+        model.addAttribute("reservations", allReservations);
+
+        return "reservations";
+    }
+
+    @PostMapping("/annuler")
+    public String annulerResa(@RequestParam(value = "idResa") Long idResa, Model model){
+        Reservation reservation = resR.getById(idResa);
+
+        reservation.setEnCours(false);
+        resR.save(reservation);
 
         Iterable<Reservation> allReservations = resR.findAll();
         model.addAttribute("reservations", allReservations);

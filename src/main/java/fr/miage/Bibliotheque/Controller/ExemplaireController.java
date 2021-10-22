@@ -61,13 +61,37 @@ public class ExemplaireController {
 
     @PostMapping("/create")
     public String createExemplaire(@RequestParam(value = "nomOeuvre") String nomOeuvre, @RequestParam(value = "etat") String etat, Model model){
-        Oeuvre oeuvre = or.findByNom(nomOeuvre);
+        Oeuvre oeuvre = or.findByNom(nomOeuvre).stream().findFirst().orElse(null);
 
         if(oeuvre != null) {
             Exemplaire exemplaire = new Exemplaire(etat, oeuvre);
 
             er.save(exemplaire);
         }
+
+        Iterable<Exemplaire> allExemplaires = er.findAll();
+        model.addAttribute("exemplaires", allExemplaires);
+
+        return "exemplaires";
+    }
+
+    @PostMapping("/toUpdate")
+    public String toUpdateExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, Model model){
+
+        Exemplaire exemplaire = er.findById(idExemplaire).orElse(null);
+
+        model.addAttribute("exemplaire", exemplaire);
+
+        return "updateExemplaire";
+    }
+
+    @PostMapping("/update")
+    public String updateExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, @RequestParam(value = "etat") String etat, Model model){
+
+        Exemplaire exemplaire = er.findById(idExemplaire).orElse(null);
+
+        exemplaire.setEtat(etat);
+        er.save(exemplaire);
 
         Iterable<Exemplaire> allExemplaires = er.findAll();
         model.addAttribute("exemplaires", allExemplaires);

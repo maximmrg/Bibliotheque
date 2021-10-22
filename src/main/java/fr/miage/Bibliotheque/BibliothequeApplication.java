@@ -1,7 +1,9 @@
 package fr.miage.Bibliotheque;
 
+import fr.miage.Bibliotheque.Component.ExemplaireRepository;
 import fr.miage.Bibliotheque.Component.OeuvreRepository;
 import fr.miage.Bibliotheque.Component.UserRepository;
+import fr.miage.Bibliotheque.Entity.Exemplaire;
 import fr.miage.Bibliotheque.Entity.Oeuvre;
 import fr.miage.Bibliotheque.Entity.User;
 import org.springframework.boot.CommandLineRunner;
@@ -21,13 +23,21 @@ public class BibliothequeApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(OeuvreRepository or, UserRepository ur) {
+	public CommandLineRunner demo(OeuvreRepository or, UserRepository ur, ExemplaireRepository exR) {
 		return (args) -> {
 			Oeuvre oeuvre = new Oeuvre("Harry Potter");
 			or.save(oeuvre);
 
-			User user = new User("Tom", "Gobillard");
+			oeuvre = or.findByNom("Harry Potter").stream().findFirst().orElse(null);
+
+			User user = new User("Gobillard", "Tom");
 			ur.save(user);
+
+			Exemplaire exemplaire = new Exemplaire("Neuf", oeuvre);
+			Exemplaire exemplaire2 = new Exemplaire("Neuf", oeuvre);
+
+			exR.save(exemplaire);
+			exR.save(exemplaire2);
 		};
 	}
 }

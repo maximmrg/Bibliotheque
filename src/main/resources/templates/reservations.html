@@ -52,6 +52,14 @@
         <tr th:each="reservation : ${reservations}">
             <td th:text="${reservation.getOeuvre().getNom()}"/>
             <td th:text="${reservation.getUser().getNom()}"/>
+            <td th:text="${reservation.getEnCours()}"/>
+            <td>
+                <form th:action="@{./annuler}" method="post">
+                    <input type="hidden" th:name="idResa" th:value="${reservation.getIdReservation()}">
+
+                    <input type="submit" value="annuler">
+                </form>
+            </td>
         </tr>
     </table>
 </div>

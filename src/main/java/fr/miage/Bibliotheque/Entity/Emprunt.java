@@ -23,6 +23,8 @@ public class Emprunt implements Serializable {
 
     private Date dateEmprunt;
 
+    private boolean enCours;
+
     @OneToOne
     private User user;
 
@@ -33,6 +35,7 @@ public class Emprunt implements Serializable {
         this.dateEmprunt = dateEmprunt;
         this.user = user;
         this.exemplaire = exemplaire;
+        this.enCours = true;
     }
 
     public long getIdEmprunt() {

@@ -45,7 +45,6 @@
         <input type="submit" value="Emprunter">
     </form>
 
-    <a href="/oeuvres/">Page des oeuvres</a>
 </div>
 <div>
     <table class="table">
@@ -55,6 +54,14 @@
         <tr th:each="emprunt : ${emprunts}">
             <td th:text="${emprunt.getExemplaire().getOeuvre().getNom()}"/>
             <td th:text="${emprunt.getUser().getNom()}"></td>
+            <td>
+                <form th:action="@{./rendre}" method="post">
+                    <input type="hidden" th:name="idUser" th:value="${emprunt.getUser().getIdUser()}">
+                    <input type="hidden" th:name="idExemplaire" th:value="${emprunt.getExemplaire().getIdExemplaire()}">
+
+                    <input type="submit" value="rendre">
+                </form>
+            </td>
         </tr>
     </table>
 </div>

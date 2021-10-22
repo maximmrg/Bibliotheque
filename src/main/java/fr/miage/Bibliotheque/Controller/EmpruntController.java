@@ -36,7 +36,7 @@ public class EmpruntController {
     public String getAllEmprunts(Model model){
         model.addAttribute("emprunt", new Emprunt());
 
-        Iterable<Emprunt> allEmprunts = er.findAll();
+        Iterable<Emprunt> allEmprunts = er.getAllByEnCoursTrue();
         model.addAttribute("emprunts", allEmprunts);
 
         return "emprunts";
@@ -44,17 +44,47 @@ public class EmpruntController {
 
     @PostMapping("/create")
     public String createEmprunt(@RequestParam(value = "nomUser") String nomUser, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model){
-        Oeuvre oeuvre = or.findByNom(nomOeuvre);
+        Oeuvre oeuvre = or.findByNom(nomOeuvre).stream().findFirst().orElse(null);
         if(oeuvre != null) {
-            Exemplaire exemplaire = exr.findByOeuvreAndAndDispo(oeuvre);
+            Exemplaire exemplaire = exr.findByOeuvreAndAndDispo(oeuvre).stream().findFirst().orElse(null);
 
             User user = ur.findByNom(nomUser);
 
             if (user != null && exemplaire != null) {
                 Emprunt emprunt = new Emprunt(new Date(), user, exemplaire);
                 er.save(emprunt);
+
+                exemplaire.setDispo(false);
+                exr.save(exemplaire);
             }
         }
+
+        Iterable<Emprunt> allEmprunts = er.getAllByEnCoursTrue();
+        model.addAttribute("emprunts", allEmprunts);
+
+        return "emprunts";
+    }
+
+    @PostMapping("/rendre")
+    public String rendreExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, @RequestParam(value = "idUser") Long idUser, Model model ){
+
+        User user = ur.findByIdUser(idUser);
+        Exemplaire exemplaire = exr.findById(idExemplaire).stream().findFirst().orElse(null);
+
+        if(user != null && exemplaire != null){
+            Emprunt emprunt = er.getEmpruntByUserAndExemplaire(user, exemplaire).stream().findFirst().orElse(null);
+
+            if(emprunt != null){
+                emprunt.setEnCours(false);
+                er.save(emprunt);
+
+                exemplaire.setDispo(true);
+                exr.save(exemplaire);
+            }
+        }
+
+        Iterable<Emprunt> allEmprunts = er.getAllByEnCoursTrue();
+        model.addAttribute("emprunts", allEmprunts);
 
         return "emprunts";
     }

@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u where u.nom = ?1")
     public User findByNom(String name);
+
+    @Query("select u from User u where u.idUser = ?1 ")
+    public User findByIdUser(Long idUSer);
 }

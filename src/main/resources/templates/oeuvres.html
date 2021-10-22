@@ -40,9 +40,11 @@
     <table class="table">
         <thead>
         <th>Nom</th>
+        <th>Nb réservations</th>
         </thead>
         <tr th:each="oeuvre: ${oeuvres}">
             <td th:text="${oeuvre.getNom()}"/>
+            <td th:text="${oeuvre.getNbResa()}"
         </tr>
     </table>
 </div>

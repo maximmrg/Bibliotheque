@@ -47,8 +47,7 @@ public class ReservationController {
         Oeuvre oeuvre = oR.findByNom(nomOeuvre).stream().findFirst().orElse(null);
 
         if(user != null && oeuvre != null){
-            int nbResa = oeuvre.getNbResa();
-            oeuvre.setNbResa(nbResa +=1);
+            oeuvre.nbResaPlus();
             Reservation reservation = new Reservation(new Date(), user, oeuvre);
             resR.save(reservation);
             oR.save(oeuvre);
@@ -66,6 +65,10 @@ public class ReservationController {
 
         reservation.setEnCours(false);
         resR.save(reservation);
+
+        Oeuvre oeuvre = reservation.getOeuvre();
+        oeuvre.nbResaMoins();
+        oR.save(oeuvre);
 
         Iterable<Reservation> allReservations = resR.findAll();
         model.addAttribute("reservations", allReservations);

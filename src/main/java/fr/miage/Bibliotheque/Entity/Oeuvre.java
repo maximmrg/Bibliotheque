@@ -49,4 +49,12 @@ public class Oeuvre implements Serializable {
     public void setNbResa(int nbResa) {
         this.nbResa = nbResa;
     }
+
+    public void nbResaPlus(){
+        this.setNbResa(this.nbResa + 1);
+    }
+
+    public void nbResaMoins(){
+        this.setNbResa(this.nbResa - 1);
+    }
 }

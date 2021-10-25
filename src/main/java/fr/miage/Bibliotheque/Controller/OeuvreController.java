@@ -32,7 +32,7 @@ public class OeuvreController {
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute Oeuvre oeuvre, Model model){
+    public String createOeuvre(@ModelAttribute Oeuvre oeuvre, Model model){
         model.addAttribute("oeuvre", new Oeuvre());
 
         if(!oeuvre.getNom().isEmpty())

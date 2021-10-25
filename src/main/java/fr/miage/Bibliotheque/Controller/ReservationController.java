@@ -2,10 +2,10 @@ package fr.miage.Bibliotheque.Controller;
 
 import fr.miage.Bibliotheque.Component.OeuvreRepository;
 import fr.miage.Bibliotheque.Component.ReservationRepository;
-import fr.miage.Bibliotheque.Component.UserRepository;
+import fr.miage.Bibliotheque.Component.UsagerRepository;
 import fr.miage.Bibliotheque.Entity.Oeuvre;
 import fr.miage.Bibliotheque.Entity.Reservation;
-import fr.miage.Bibliotheque.Entity.User;
+import fr.miage.Bibliotheque.Entity.Usager;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +23,9 @@ public class ReservationController {
 
     private final ReservationRepository resR;
     private final OeuvreRepository oR;
-    private final UserRepository uR;
+    private final UsagerRepository uR;
 
-    public ReservationController(ReservationRepository resR, OeuvreRepository oR, UserRepository uR) {
+    public ReservationController(ReservationRepository resR, OeuvreRepository oR, UsagerRepository uR) {
         this.resR = resR;
         this.oR = oR;
         this.uR = uR;
@@ -38,23 +38,35 @@ public class ReservationController {
         Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
         model.addAttribute("reservationsEnCours", allReservations);
 
+        Iterable<Oeuvre> allOeuvres = oR.findAll();
+        model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Usager> allUsagers = uR.findAll();
+        model.addAttribute("usagers", allUsagers);
+
         return "reservations";
     }
 
     @PostMapping("/create")
-    public String createReservation(@RequestParam(value = "nomUser") String nomUser, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model) {
-        User user = uR.findByNom(nomUser);
+    public String createReservation(@RequestParam(value = "nomUsager") String nomUsager, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model) {
+        Usager Usager = uR.findByNom(nomUsager);
         Oeuvre oeuvre = oR.findByNom(nomOeuvre).stream().findFirst().orElse(null);
 
-        if(user != null && oeuvre != null){
+        if(Usager != null && oeuvre != null){
             oeuvre.nbResaPlus();
-            Reservation reservation = new Reservation(new Date(), user, oeuvre);
+            Reservation reservation = new Reservation(new Date(), Usager, oeuvre);
             resR.save(reservation);
             oR.save(oeuvre);
         }
 
         Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
         model.addAttribute("reservationsEnCours", allReservations);
+
+        Iterable<Oeuvre> allOeuvres = oR.findAll();
+        model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Usager> allUsagers = uR.findAll();
+        model.addAttribute("usagers", allUsagers);
 
         return "reservations";
     }
@@ -63,7 +75,7 @@ public class ReservationController {
     public String annulerResa(@RequestParam(value = "idResa") Long idResa, Model model){
         Reservation reservation = resR.getById(idResa);
 
-        reservation.setEnCours(false);
+        reservation.setReservationEnCours(false);
         resR.save(reservation);
 
         Oeuvre oeuvre = reservation.getOeuvre();
@@ -72,6 +84,12 @@ public class ReservationController {
 
         Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
         model.addAttribute("reservationsEnCours", allReservations);
+
+        Iterable<Oeuvre> allOeuvres = oR.findAll();
+        model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Usager> allUsagers = uR.findAll();
+        model.addAttribute("usagers", allUsagers);
 
         return "reservations";
     }

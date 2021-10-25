@@ -16,30 +16,23 @@ import java.io.Serializable;
 public class Oeuvre implements Serializable {
 
     @Id
-    @GeneratedValue
-    private long idOeuvre;
+    private String nomOeuvre;
 
-    private String nom;
     private int nbResa;
+    private boolean estPerimee = false;
 
-    public Oeuvre(String nom) {
-        this.nom = nom;
+    public Oeuvre(String nomOeuvre) {
+        this.nomOeuvre = nomOeuvre;
+        this.nbResa=0;
+        estPerimee=false;
     }
 
-    public long getIdOeuvre() {
-        return idOeuvre;
+    public String getNomOeuvre() {
+        return nomOeuvre;
     }
 
-    public void setIdOeuvre(long idOeuvre) {
-        this.idOeuvre = idOeuvre;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNomOeuvre(String nomOeuvre) {
+        this.nomOeuvre = nomOeuvre;
     }
 
     public int getNbResa() {
@@ -48,6 +41,14 @@ public class Oeuvre implements Serializable {
 
     public void setNbResa(int nbResa) {
         this.nbResa = nbResa;
+    }
+
+    public boolean isEstPerimee() {
+        return estPerimee;
+    }
+
+    public void setEstPerimee(boolean estPerimee) {
+        this.estPerimee = estPerimee;
     }
 
     public void nbResaPlus(){

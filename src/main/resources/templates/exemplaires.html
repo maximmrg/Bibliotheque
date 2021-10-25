@@ -23,7 +23,7 @@
             <a href="/exemplaires/" class="nav-link">Exemplaire</a>
         </li>
         <li class="nav-item">
-            <a href="/users/" class="nav-link">Utilisateurs</a>
+            <a href="/usagers/" class="nav-link">Utilisateurs</a>
         </li>
         <li class="nav-item">
             <a href="/emprunts/" class="nav-link">Emprunts</a>
@@ -63,8 +63,13 @@
     </form>-->
 
     <form th:action="@{./create}" method="post" action="#">
-        <input type="text" th:name="nomOeuvre" placeholder="oeuvre">
+        <!--<input type="text" th:name="nomOeuvre" placeholder="oeuvre">-->
 
+
+        <select th:name="nomOeuvre">
+            <option value="null">Oeuvre</option>
+            <option th:each="oeuvre : ${oeuvres}" th:value="${oeuvre.getNomOeuvre()}" th:text="${oeuvre.getNomOeuvre()}"/>
+        </select>
         </br>
         </br>
         <label>Etat : </label>
@@ -73,7 +78,8 @@
             <option value="Usé">Usé</option>
         </select>
 
-        </br>
+        <br/>
+        <br/>
 
         <input type="submit" value="Créer">
     </form>
@@ -87,9 +93,9 @@
         <th>Dispo</th>
         </thead>
         <tr th:each="ex : ${exemplaires}">
-            <td th:text="${ex.getOeuvre().getNom()}"/>
+            <td th:text="${ex.getOeuvre().getNomOeuvre()}"/>
             <td th:text="${ex.getEtat()}"/>
-            <td th:text="${ex.isDispo()}"/>
+            <td th:text="${ex.isEstDispo()}"/>
             <td>
                 <form th:action="@{./toUpdate}" method="post">
                     <input type="hidden" th:name="idExemplaire" th:value="${ex.getIdExemplaire()}">

@@ -18,14 +18,14 @@ public class Exemplaire implements Serializable {
     private long idExemplaire;
 
     private String etat;
-    private boolean isDispo;
+    private boolean estDispo = true;
+    private boolean estRetire = false;
 
     @ManyToOne
     private Oeuvre oeuvre;
 
-    public Exemplaire(String etat,Oeuvre oeuvre) {
+    public Exemplaire(String etat, Oeuvre oeuvre) {
         this.etat = etat;
-        this.isDispo = true;
         this.oeuvre = oeuvre;
     }
 
@@ -45,19 +45,27 @@ public class Exemplaire implements Serializable {
         this.etat = etat;
     }
 
+    public boolean isEstDispo() {
+        return estDispo;
+    }
+
+    public void setEstDispo(boolean estDispo) {
+        this.estDispo = estDispo;
+    }
+
+    public boolean isEstRetire() {
+        return estRetire;
+    }
+
+    public void setEstRetire(boolean estRetire) {
+        this.estRetire = estRetire;
+    }
+
     public Oeuvre getOeuvre() {
         return oeuvre;
     }
 
     public void setOeuvre(Oeuvre oeuvre) {
         this.oeuvre = oeuvre;
-    }
-
-    public boolean isDispo() {
-        return isDispo;
-    }
-
-    public void setDispo(boolean dispo) {
-        isDispo = dispo;
     }
 }

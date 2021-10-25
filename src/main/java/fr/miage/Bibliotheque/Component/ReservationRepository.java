@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    @Query("select r from Reservation r where r.enCours=true ")
+    @Query("select r from Reservation r where r.reservationEnCours=true ")
     public List<Reservation> getAllByEnCoursTrue();
 }

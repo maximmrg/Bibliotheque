@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface ExemplaireRepository extends JpaRepository<Exemplaire, Long> {
 
-    @Query("select e from Exemplaire e, Oeuvre  o where e.isDispo = true and e.oeuvre = o and o.nom = ?1")
+    @Query("select e from Exemplaire e, Oeuvre  o where e.estDispo = true and e.oeuvre = o and o.nomOeuvre = ?1")
     public List<Exemplaire> findByOeuvre_NomAndAndDispo(String name);
 
-    @Query("select e from Exemplaire e where e.isDispo = true and e.oeuvre = ?1")
+    @Query("select e from Exemplaire e where e.estDispo = true and e.oeuvre = ?1")
     public List<Exemplaire> findByOeuvreAndAndDispo(Oeuvre oeuvre);
 }

@@ -23,7 +23,7 @@
                 <a href="/exemplaires/" class="nav-link">Exemplaire</a>
             </li>
             <li class="nav-item">
-                <a href="/users/" class="nav-link">Utilisateurs</a>
+                <a href="/usagers/" class="nav-link">Utilisateurs</a>
             </li>
             <li class="nav-item">
                 <a href="/emprunts/" class="nav-link">Emprunts</a>
@@ -43,8 +43,8 @@
         <th>Nb réservations</th>
         </thead>
         <tr th:each="oeuvre: ${oeuvres}">
-            <td th:text="${oeuvre.getNom()}"/>
-            <td th:text="${oeuvre.getNbResa()}"
+            <td th:text="${oeuvre.getNomOeuvre()}"/>
+            <td th:text="${oeuvre.getNbResa()}"/>
         </tr>
     </table>
 </div>
@@ -52,7 +52,7 @@
 <div>
     <h3>Créer nouvelle oeuvre</h3>
     <form th:action="@{./create}" method="POST" th:object="${oeuvre}" action="#">
-        Nom : <input type="text" name="nom" th:field="*{nom}"/>
+        Nom : <input type="text" name="nom" th:field="*{nomOeuvre}"/>
         <input type="submit" value="Créer"/>
     </form>
 </div>

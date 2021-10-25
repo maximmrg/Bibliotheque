@@ -32,10 +32,8 @@ public class ExemplaireController {
         Iterable<Exemplaire> allExemplaires = er.findAll();
         model.addAttribute("exemplaires", allExemplaires);
 
-        //model.addAttribute("oeuvre", new Oeuvre());
-
-        //Iterable<Oeuvre> allOeuvres = or.findAll();
-        //model.addAttribute("oeuvres", allOeuvres);
+        Iterable<Oeuvre> allOeuvres = or.findAll();
+        model.addAttribute("oeuvres", allOeuvres);
 
         return "exemplaires";
     }
@@ -72,6 +70,9 @@ public class ExemplaireController {
         Iterable<Exemplaire> allExemplaires = er.findAll();
         model.addAttribute("exemplaires", allExemplaires);
 
+        Iterable<Oeuvre> allOeuvres = or.findAll();
+        model.addAttribute("oeuvres", allOeuvres);
+
         return "exemplaires";
     }
 
@@ -95,6 +96,9 @@ public class ExemplaireController {
 
         Iterable<Exemplaire> allExemplaires = er.findAll();
         model.addAttribute("exemplaires", allExemplaires);
+
+        Iterable<Oeuvre> allOeuvres = or.findAll();
+        model.addAttribute("oeuvres", allOeuvres);
 
         return "exemplaires";
     }

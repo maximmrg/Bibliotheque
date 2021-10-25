@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,32 +15,24 @@ import java.util.Date;
 public class Emprunt implements Serializable {
 
     @Id
-    @GeneratedValue
     private long idEmprunt;
 
     private Date dateEmprunt;
 
     private boolean enCours;
 
+
     @OneToOne
-    private User user;
+    private Usager usager;
 
     @OneToOne
     private Exemplaire exemplaire;
 
-    public Emprunt(Date dateEmprunt, User user, Exemplaire exemplaire) {
+    public Emprunt(Date dateEmprunt, Usager usager, Exemplaire exemplaire) {
         this.dateEmprunt = dateEmprunt;
-        this.user = user;
+        this.usager = usager;
         this.exemplaire = exemplaire;
         this.enCours = true;
-    }
-
-    public long getIdEmprunt() {
-        return idEmprunt;
-    }
-
-    public void setIdEmprunt(long idEmprunt) {
-        this.idEmprunt = idEmprunt;
     }
 
     public Date getDateEmprunt() {
@@ -54,12 +43,20 @@ public class Emprunt implements Serializable {
         this.dateEmprunt = dateEmprunt;
     }
 
-    public User getUser() {
-        return user;
+    public boolean isEnCours() {
+        return enCours;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEnCours(boolean enCours) {
+        this.enCours = enCours;
+    }
+
+    public Usager getUsager() {
+        return usager;
+    }
+
+    public void setUsager(Usager usager) {
+        this.usager = usager;
     }
 
     public Exemplaire getExemplaire() {
@@ -69,4 +66,7 @@ public class Emprunt implements Serializable {
     public void setExemplaire(Exemplaire exemplaire) {
         this.exemplaire = exemplaire;
     }
+
+
 }
+

@@ -22,17 +22,16 @@ public class Reservation implements Serializable {
     private long idReservation;
 
     private Date dateReservation;
-    private Boolean enCours;
+    private Boolean reservationEnCours = true;
 
     @OneToOne
-    private User user;
+    private Usager user;
 
     @OneToOne
     private Oeuvre oeuvre;
 
-    public Reservation(Date dateReservation, User user, Oeuvre oeuvre) {
+    public Reservation(Date dateReservation, Usager user, Oeuvre oeuvre) {
         this.dateReservation = dateReservation;
-        this.enCours = true;
         this.user = user;
         this.oeuvre = oeuvre;
     }
@@ -53,19 +52,19 @@ public class Reservation implements Serializable {
         this.dateReservation = dateReservation;
     }
 
-    public Boolean getEnCours() {
-        return enCours;
+    public Boolean getReservationEnCours() {
+        return reservationEnCours;
     }
 
-    public void setEnCours(Boolean enCours) {
-        this.enCours = enCours;
+    public void setReservationEnCours(Boolean reservationEnCours) {
+        this.reservationEnCours = reservationEnCours;
     }
 
-    public User getUser() {
+    public Usager getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Usager user) {
         this.user = user;
     }
 

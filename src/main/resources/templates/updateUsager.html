@@ -22,7 +22,7 @@
                 <a href="/exemplaires/" class="nav-link">Exemplaire</a>
             </li>
             <li class="nav-item">
-                <a href="/users/" class="nav-link">Utilisateurs</a>
+                <a href="/usagers/" class="nav-link">Utilisateurs</a>
             </li>
             <li class="nav-item">
                 <a href="/emprunts/" class="nav-link">Emprunts</a>
@@ -37,9 +37,8 @@
 
 
 <h3>Modifier utilisateur</h3>
-<form th:action="@{./update}" method="POST" th:object="${user}" action="#">
-    Nom : <input type="text" th:value="${user.getNom()}" th:field="*{nom}"/>
-    <input type="hidden" th:value="${user.getIdUser()}" th:field="*{idUser}">
+<form th:action="@{./update}" method="POST" th:object="${usager}" action="#">
+    Nom : <input type="text" th:value="${usager.getNom()}" th:field="*{nom}"/>
     <input type="submit" value="Modifier"/>
 </form>
 

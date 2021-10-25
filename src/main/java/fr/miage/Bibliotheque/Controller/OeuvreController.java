@@ -2,7 +2,7 @@ package fr.miage.Bibliotheque.Controller;
 
 import fr.miage.Bibliotheque.Component.OeuvreRepository;
 import fr.miage.Bibliotheque.Entity.Oeuvre;
-import fr.miage.Bibliotheque.Entity.User;
+import fr.miage.Bibliotheque.Entity.Usager;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +32,10 @@ public class OeuvreController {
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute Oeuvre oeuvre, Model model){
+    public String createUsager(@ModelAttribute Oeuvre oeuvre, Model model){
         model.addAttribute("oeuvre", new Oeuvre());
 
-        if(!oeuvre.getNom().isEmpty())
+        if(!oeuvre.getNomOeuvre().isEmpty())
             or.save(oeuvre);
 
         Iterable<Oeuvre> allOeuvres = or.findAll();

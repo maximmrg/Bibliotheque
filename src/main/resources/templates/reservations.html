@@ -21,7 +21,7 @@
                 <a href="/exemplaires/" class="nav-link">Exemplaire</a>
             </li>
             <li class="nav-item">
-                <a href="/users/" class="nav-link">Utilisateurs</a>
+                <a href="/usagers/" class="nav-link">Utilisateurs</a>
             </li>
             <li class="nav-item">
                 <a href="/emprunts/" class="nav-link">Emprunts</a>
@@ -37,8 +37,20 @@
 
 <div class="container border p-2">
     <form th:action="@{./create}" method="post" action="#">
-        <input type="text" th:name="nomUser" placeholder="utilisateur">
-        <input type="text" th:name="nomOeuvre" placeholder="oeuvre">
+        <select th:name="nomUsager">
+            <option value="null">Usager</option>
+            <option th:each="usager : ${usagers}" th:value="${usager.getNom()}" th:text="${usager.getNom()}"/>
+        </select>
+        <br/>
+        <br/>
+
+        <select th:name="nomOeuvre">
+            <option value="null">Oeuvre</option>
+            <option th:each="oeuvre : ${oeuvres}" th:value="${oeuvre.getNomOeuvre()}" th:text="${oeuvre.getNomOeuvre()}"/>
+        </select>
+
+        <br/>
+        <br/>
 
         <input type="submit" value="Réserver">
     </form>
@@ -50,9 +62,9 @@
 
         </thead>
         <tr th:each="reservation : ${reservationsEnCours}">
-            <td th:text="${reservation.getOeuvre().getNom()}"/>
+            <td th:text="${reservation.getOeuvre().getNomOeuvre()}"/>
             <td th:text="${reservation.getUser().getNom()}"/>
-            <td th:text="${reservation.getEnCours()}"/>
+            <td th:text="${reservation.getReservationEnCours()}"/>
             <td>
                 <form th:action="@{./annuler}" method="post">
                     <input type="hidden" th:name="idResa" th:value="${reservation.getIdReservation()}">

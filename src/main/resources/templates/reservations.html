@@ -49,7 +49,7 @@
         <thead>
 
         </thead>
-        <tr th:each="reservation : ${reservations}">
+        <tr th:each="reservation : ${reservationsEnCours}">
             <td th:text="${reservation.getOeuvre().getNom()}"/>
             <td th:text="${reservation.getUser().getNom()}"/>
             <td th:text="${reservation.getEnCours()}"/>

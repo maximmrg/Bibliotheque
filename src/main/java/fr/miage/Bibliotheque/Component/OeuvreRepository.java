@@ -13,4 +13,6 @@ public interface OeuvreRepository extends JpaRepository<Oeuvre, Long>{
 
     @Query("select o from Oeuvre o where o.nom = ?1")
     public List<Oeuvre> findByNom(String name);
+
+
 }

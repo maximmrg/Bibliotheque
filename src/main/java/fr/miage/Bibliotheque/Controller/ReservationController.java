@@ -35,8 +35,8 @@ public class ReservationController {
     public String getAllReservations(Model model){
         model.addAttribute("reservation", new Reservation());
 
-        Iterable<Reservation> allReservations = resR.findAll();
-        model.addAttribute("reservations", allReservations);
+        Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
+        model.addAttribute("reservationsEnCours", allReservations);
 
         return "reservations";
     }
@@ -53,8 +53,8 @@ public class ReservationController {
             oR.save(oeuvre);
         }
 
-        Iterable<Reservation> allReservations = resR.findAll();
-        model.addAttribute("reservations", allReservations);
+        Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
+        model.addAttribute("reservationsEnCours", allReservations);
 
         return "reservations";
     }
@@ -70,8 +70,8 @@ public class ReservationController {
         oeuvre.nbResaMoins();
         oR.save(oeuvre);
 
-        Iterable<Reservation> allReservations = resR.findAll();
-        model.addAttribute("reservations", allReservations);
+        Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
+        model.addAttribute("reservationsEnCours", allReservations);
 
         return "reservations";
     }

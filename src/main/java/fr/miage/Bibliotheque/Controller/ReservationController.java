@@ -48,7 +48,7 @@ public class ReservationController {
     }
 
     @PostMapping("/create")
-    public String createReservation(@RequestParam(value = "nomUsager") String nomUsager, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model) {
+    public String reserver(@RequestParam(value = "nomUsager") String nomUsager, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model) {
         Usager Usager = uR.findByNom(nomUsager);
         Oeuvre oeuvre = oR.findByNom(nomOeuvre).stream().findFirst().orElse(null);
 
@@ -72,7 +72,7 @@ public class ReservationController {
     }
 
     @PostMapping("/annuler")
-    public String annulerResa(@RequestParam(value = "idResa") Long idResa, Model model){
+    public String modifierReservation(@RequestParam(value = "idResa") Long idResa, Model model){
         Reservation reservation = resR.getById(idResa);
 
         reservation.setReservationEnCours(false);

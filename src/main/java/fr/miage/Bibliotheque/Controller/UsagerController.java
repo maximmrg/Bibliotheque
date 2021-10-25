@@ -37,7 +37,7 @@ public class UsagerController {
 
 
     @PostMapping("/create")
-    public String createUsager(@ModelAttribute Usager Usager,  Model model){
+    public String creerUsager(@ModelAttribute Usager Usager,  Model model){
         model.addAttribute("usager", new Usager());
 
 
@@ -64,7 +64,7 @@ public class UsagerController {
     }
 
     @PostMapping("/update")
-    public String updateUsager(@ModelAttribute Usager Usager, Model model){
+    public String modifierUsager(@ModelAttribute Usager Usager, Model model){
 
         /*Usager Usager = ur.findByIdUsager(idUsager);
 

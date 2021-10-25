@@ -15,6 +15,7 @@ import java.util.Date;
 public class Emprunt implements Serializable {
 
     @Id
+    @GeneratedValue
     private long idEmprunt;
 
     private Date dateEmprunt;

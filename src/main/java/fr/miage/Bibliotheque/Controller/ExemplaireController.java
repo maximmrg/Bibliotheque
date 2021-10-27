@@ -35,6 +35,9 @@ public class ExemplaireController {
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
 
+        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
+        model.addAttribute("oeuvresDispo", allOeuvresDispo);
+
         return "exemplaires";
     }
 
@@ -53,6 +56,9 @@ public class ExemplaireController {
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
+        model.addAttribute("oeuvresDispo", allOeuvresDispo);
 
         return "exemplaires";
     }
@@ -80,6 +86,9 @@ public class ExemplaireController {
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
+        model.addAttribute("oeuvresDispo", allOeuvresDispo);
 
         return "exemplaires";
     }

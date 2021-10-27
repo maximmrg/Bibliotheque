@@ -49,7 +49,7 @@
 
         <select th:name="nomOeuvre">
             <option value="null">Oeuvre</option>
-            <option th:each="oeuvre : ${oeuvres}" th:value="${oeuvre.getNomOeuvre()}" th:text="${oeuvre.getNomOeuvre()}"/>
+            <option th:each="oeuvre : ${oeuvresDispo}" th:value="${oeuvre.getNomOeuvre()}" th:text="${oeuvre.getNomOeuvre()}"/>
         </select>
 
         <br/>

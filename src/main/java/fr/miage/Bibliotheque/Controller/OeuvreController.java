@@ -6,10 +6,7 @@ import fr.miage.Bibliotheque.Entity.Usager;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value="/oeuvres")
@@ -40,6 +37,23 @@ public class OeuvreController {
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
 
+        model.addAttribute("oeuvres", allOeuvres);
+
+        return "oeuvres";
+    }
+
+    @PostMapping("/retirer")
+    public String retirerOeuvre(@RequestParam(value = "nomOeuvre") String nomOeuvre, Model model){
+        model.addAttribute("oeuvre", new Oeuvre());
+
+        Oeuvre oeuvre2delete = or.findByNom(nomOeuvre).stream().findFirst().orElse(null);
+
+        if(oeuvre2delete != null){
+            oeuvre2delete.setEstPerimee(true);
+            or.save(oeuvre2delete);
+        }
+
+        Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
 
         return "oeuvres";

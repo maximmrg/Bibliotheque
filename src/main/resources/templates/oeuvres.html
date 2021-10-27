@@ -45,6 +45,13 @@
         <tr th:each="oeuvre: ${oeuvres}">
             <td th:text="${oeuvre.getNomOeuvre()}"/>
             <td th:text="${oeuvre.getNbResa()}"/>
+            <td>
+                <form th:action="@{./retirer}" method="post">
+                    <input type="hidden" th:name="nomOeuvre" th:value="${oeuvre.getNomOeuvre()}">
+
+                    <input type="submit" value="retirer">
+                </form>
+            </td>
         </tr>
     </table>
 </div>

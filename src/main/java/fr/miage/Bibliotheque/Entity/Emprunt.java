@@ -22,7 +22,6 @@ public class Emprunt implements Serializable {
 
     private boolean enCours;
 
-
     @OneToOne
     private Usager usager;
 

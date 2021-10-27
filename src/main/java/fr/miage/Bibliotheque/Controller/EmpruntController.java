@@ -42,6 +42,9 @@ public class EmpruntController {
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
 
+        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
+        model.addAttribute("oeuvresDispo", allOeuvresDispo);
+
         Iterable<Usager> allUsagers = ur.findAll();
         model.addAttribute("usagers", allUsagers);
 
@@ -70,6 +73,9 @@ public class EmpruntController {
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
+        model.addAttribute("oeuvresDispo", allOeuvresDispo);
 
         Iterable<Usager> allUsagers = ur.findAll();
         model.addAttribute("usagers", allUsagers);
@@ -100,6 +106,9 @@ public class EmpruntController {
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
+
+        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
+        model.addAttribute("oeuvresDispo", allOeuvresDispo);
 
         Iterable<Usager> allUsagers = ur.findAll();
         model.addAttribute("usagers", allUsagers);

@@ -62,7 +62,9 @@
 <div>
     <table class="table">
         <thead>
-
+            <th>Oeuvre</th>
+            <th>Usager</th>
+            <th>Action</th>
         </thead>
         <tr th:each="emprunt : ${emprunts}">
             <td th:text="${emprunt.getExemplaire().getOeuvre().getNomOeuvre()}"/>

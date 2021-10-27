@@ -32,8 +32,14 @@ public class OeuvreController {
     public String creerOeuvre(@ModelAttribute Oeuvre oeuvre, Model model){
         model.addAttribute("oeuvre", new Oeuvre());
 
-        if(!oeuvre.getNomOeuvre().isEmpty())
-            or.save(oeuvre);
+        if(!oeuvre.getNomOeuvre().isEmpty()) {
+
+            Oeuvre existOeuvre = or.findByNom(oeuvre.getNomOeuvre()).stream().findFirst().orElse(null);;
+
+            if(existOeuvre == null)
+                or.save(oeuvre);
+
+        }
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
 

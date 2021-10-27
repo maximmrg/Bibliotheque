@@ -37,11 +37,13 @@ public class UsagerController {
 
 
     @PostMapping("/create")
-    public String creerUsager(@ModelAttribute Usager Usager,  Model model){
+    public String creerUsager(@ModelAttribute Usager usager,  Model model){
         model.addAttribute("usager", new Usager());
 
+        Usager existUsager = ur.findByIdUsager(usager.getNom());
 
-        ur.save(Usager);
+        if (existUsager == null)
+            ur.save(usager);
 
         Iterable<Usager> allUsagers = ur.findAll();
 
@@ -64,19 +66,12 @@ public class UsagerController {
     }
 
     @PostMapping("/update")
-    public String modifierUsager(@ModelAttribute Usager Usager, Model model){
+    public String modifierUsager(@ModelAttribute Usager usager, Model model){
 
-        /*Usager Usager = ur.findByIdUsager(idUsager);
+        Usager Usager2save = ur.findByIdUsager(usager.getNom());
 
-        if(Usager != null) {
-            Usager.setNom(nomUsager);
-
-            ur.save(Usager2);
-
-
-        }*/
-        Usager Usager2save = ur.findByIdUsager(Usager.getNom());
-        Usager2save.setNom(Usager.getNom());
+        Usager2save.setNom(usager.getNom());
+        Usager2save.setPrenom(usager.getPrenom());
         ur.save(Usager2save);
 
         Iterable<Usager> allUsagers = ur.findAll();

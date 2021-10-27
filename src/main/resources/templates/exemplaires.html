@@ -91,6 +91,7 @@
         <th>Oeuvre</th>
         <th>Etat</th>
         <th>Dispo</th>
+        <th>Action</th>
         </thead>
         <tr th:each="ex : ${exemplaires}">
             <td th:text="${ex.getOeuvre().getNomOeuvre()}"/>

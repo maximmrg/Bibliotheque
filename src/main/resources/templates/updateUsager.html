@@ -38,9 +38,12 @@
 
 <h3>Modifier utilisateur</h3>
 <form th:action="@{./update}" method="POST" th:object="${usager}" action="#">
-    Nom : <input type="text" th:value="${usager.getNom()}" th:field="*{nom}"/>
+    Nom : <label th:text="${usager.getNom()}"/>
+    <input type="hidden" th:value="${usager.getNom()}" th:field="*{nom}"/>
+    </br>
     </br>
     Prenom : <input type="text" th:value="${usager.getPrenom()}" th:field="*{prenom}"/>
+
     <input type="submit" value="Modifier"/>
 </form>
 

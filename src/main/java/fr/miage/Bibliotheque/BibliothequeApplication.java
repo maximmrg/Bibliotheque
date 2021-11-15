@@ -22,7 +22,7 @@ public class BibliothequeApplication {
 		SpringApplication.run(BibliothequeApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner demo(OeuvreRepository or, UsagerRepository ur, ExemplaireRepository exR) {
 		return (args) -> {
 			Oeuvre oeuvre = new Oeuvre("Harry Potter");
@@ -39,5 +39,5 @@ public class BibliothequeApplication {
 			exR.save(exemplaire);
 			exR.save(exemplaire2);
 		};
-	}
+	}*/
 }

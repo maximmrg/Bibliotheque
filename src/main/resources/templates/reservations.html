@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -10,28 +12,7 @@
 
     <title>Réservations</title>
 </head>
-<body class="container">
-<nav class="navbar">
-    <div>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a href="/oeuvres/" class="nav-link">Oeuvres</a>
-            </li>
-            <li class="nav-item">
-                <a href="/exemplaires/" class="nav-link">Exemplaire</a>
-            </li>
-            <li class="nav-item">
-                <a href="/usagers/" class="nav-link">Utilisateurs</a>
-            </li>
-            <li class="nav-item">
-                <a href="/emprunts/" class="nav-link">Emprunts</a>
-            </li>
-            <li class="nav-item">
-                <a href="/reservations/" class="nav-link">Reservations</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div class="container" layout:fragment="content">
 
 <h1>Réservations</h1>
 
@@ -76,5 +57,5 @@
         </tr>
     </table>
 </div>
-</body>
+</div>
 </html>

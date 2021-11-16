@@ -24,8 +24,8 @@ public class Exemplaire implements Serializable {
     @ManyToOne
     private Oeuvre oeuvre;
 
-    public Exemplaire(String etat, Oeuvre oeuvre) {
-        this.etat = etat;
+    public Exemplaire(Oeuvre oeuvre) {
+        this.etat = "Neuf";
         this.oeuvre = oeuvre;
     }
 

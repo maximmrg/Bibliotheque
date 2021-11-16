@@ -55,7 +55,7 @@ public class EmpruntController {
     public String creerEmprunt(@RequestParam(value = "nomUsager") String nomUsager, @RequestParam(value = "nomOeuvre") String nomOeuvre, Model model){
         Oeuvre oeuvre = or.findByNom(nomOeuvre).stream().findFirst().orElse(null);
         if(oeuvre != null) {
-            Exemplaire exemplaire = exr.findByOeuvreAndAndDispo(oeuvre).stream().findFirst().orElse(null);
+            Exemplaire exemplaire = exr.findByOeuvreAndDispoAndAndEtatIsNeuf(oeuvre).stream().findFirst().orElse(null);
 
             Usager Usager = ur.findByNom(nomUsager);
 

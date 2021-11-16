@@ -25,40 +25,40 @@ public class ExemplaireController {
         this.or = or;
     }
 
-    @GetMapping
-    public String getAllExemplaires(Model model){
-        //model.addAttribute("exemplaire", new Exemplaire());
+    public void init(Model model){
+        Iterable<Exemplaire> exemplairesNeufs = er.findAllByEtatIsNeuf();
+        model.addAttribute("exemplaires", exemplairesNeufs);
 
-        Iterable<Exemplaire> allExemplaires = er.findAll();
-        model.addAttribute("exemplaires", allExemplaires);
+        Iterable<Exemplaire> exemplairesUses = er.findAllByEtatIsUse();
+        model.addAttribute("exemplairesUses", exemplairesUses);
 
         Iterable<Oeuvre> allOeuvres = or.findAll();
         model.addAttribute("oeuvres", allOeuvres);
 
         Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
         model.addAttribute("oeuvresDispo", allOeuvresDispo);
+    }
+
+    @GetMapping
+    public String getAllExemplaires(Model model){
+        //model.addAttribute("exemplaire", new Exemplaire());
+
+        init(model);
 
         return "exemplaires";
     }
 
     @PostMapping("/create")
-    public String ajouterExemplaire(@RequestParam(value = "nomOeuvre") String nomOeuvre, @RequestParam(value = "etat") String etat, Model model){
+    public String ajouterExemplaire(@RequestParam(value = "nomOeuvre") String nomOeuvre, Model model){
         Oeuvre oeuvre = or.findByNom(nomOeuvre).stream().findFirst().orElse(null);
 
         if(oeuvre != null) {
-            Exemplaire exemplaire = new Exemplaire(etat, oeuvre);
+            Exemplaire exemplaire = new Exemplaire(oeuvre);
 
             er.save(exemplaire);
         }
 
-        Iterable<Exemplaire> allExemplaires = er.findAll();
-        model.addAttribute("exemplaires", allExemplaires);
-
-        Iterable<Oeuvre> allOeuvres = or.findAll();
-        model.addAttribute("oeuvres", allOeuvres);
-
-        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
-        model.addAttribute("oeuvresDispo", allOeuvresDispo);
+        init(model);
 
         return "exemplaires";
     }
@@ -74,21 +74,14 @@ public class ExemplaireController {
     }
 
     @PostMapping("/update")
-    public String modifierExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, @RequestParam(value = "etat") String etat, Model model){
+    public String modifierExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, Model model){
 
         Exemplaire exemplaire = er.findById(idExemplaire).orElse(null);
 
-        exemplaire.setEtat(etat);
+        exemplaire.setEtat("Usé");
         er.save(exemplaire);
 
-        Iterable<Exemplaire> allExemplaires = er.findAll();
-        model.addAttribute("exemplaires", allExemplaires);
-
-        Iterable<Oeuvre> allOeuvres = or.findAll();
-        model.addAttribute("oeuvres", allOeuvres);
-
-        Iterable<Oeuvre> allOeuvresDispo = or.findAllByEstPerimeeFalse();
-        model.addAttribute("oeuvresDispo", allOeuvresDispo);
+        init(model);
 
         return "exemplaires";
     }

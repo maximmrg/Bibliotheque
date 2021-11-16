@@ -31,18 +31,22 @@ public class ReservationController {
         this.uR = uR;
     }
 
-    @GetMapping
-    public String getAllReservations(Model model){
-        model.addAttribute("reservation", new Reservation());
-
+    public void init(Model model){
         Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
         model.addAttribute("reservationsEnCours", allReservations);
 
-        Iterable<Oeuvre> allOeuvres = oR.findAll();
+        Iterable<Oeuvre> allOeuvres = oR.findAllByEstPerimeeFalse();
         model.addAttribute("oeuvres", allOeuvres);
 
         Iterable<Usager> allUsagers = uR.findAll();
         model.addAttribute("usagers", allUsagers);
+    }
+
+    @GetMapping
+    public String getAllReservations(Model model){
+        model.addAttribute("reservation", new Reservation());
+
+        init(model);
 
         return "reservations";
     }
@@ -59,14 +63,7 @@ public class ReservationController {
             oR.save(oeuvre);
         }
 
-        Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
-        model.addAttribute("reservationsEnCours", allReservations);
-
-        Iterable<Oeuvre> allOeuvres = oR.findAll();
-        model.addAttribute("oeuvres", allOeuvres);
-
-        Iterable<Usager> allUsagers = uR.findAll();
-        model.addAttribute("usagers", allUsagers);
+        init(model);
 
         return "reservations";
     }
@@ -82,14 +79,7 @@ public class ReservationController {
         oeuvre.nbResaMoins();
         oR.save(oeuvre);
 
-        Iterable<Reservation> allReservations = resR.getAllByEnCoursTrue();
-        model.addAttribute("reservationsEnCours", allReservations);
-
-        Iterable<Oeuvre> allOeuvres = oR.findAll();
-        model.addAttribute("oeuvres", allOeuvres);
-
-        Iterable<Usager> allUsagers = uR.findAll();
-        model.addAttribute("usagers", allUsagers);
+        init(model);
 
         return "reservations";
     }

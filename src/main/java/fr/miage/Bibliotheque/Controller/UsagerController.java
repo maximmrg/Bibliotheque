@@ -1,17 +1,11 @@
 package fr.miage.Bibliotheque.Controller;
 
-import com.sun.xml.bind.v2.model.core.ID;
 import fr.miage.Bibliotheque.Component.UsagerRepository;
 import fr.miage.Bibliotheque.Entity.Usager;
 import org.springframework.hateoas.server.ExposesResourceFor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/usagers")
@@ -44,6 +38,8 @@ public class UsagerController {
 
         if (existUsager == null)
             ur.save(usager);
+        else
+            model.addAttribute("errorMsg", "Erreur, ce nom d'utilisateur est déjà enregistré.");
 
         Iterable<Usager> allUsagers = ur.findAll();
 

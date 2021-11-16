@@ -16,8 +16,8 @@
 
 <h1>Réservations</h1>
 
-<div class="container border p-2">
-    <form th:action="@{./create}" method="post" action="#">
+<div class="container border p-3">
+    <form th:action="@{./create}" method="post" action="#" class="p-2">
         <select th:name="nomUsager">
             <option value="null">Usager</option>
             <option th:each="usager : ${usagers}" th:value="${usager.getNom()}" th:text="${usager.getNom()}"/>
@@ -37,7 +37,7 @@
     </form>
 </div>
 
-<div>
+<div class="p-3">
     <table class="table">
         <thead>
             <th>Oeuvre</th>

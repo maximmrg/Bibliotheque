@@ -15,52 +15,52 @@
 </head>
 <div class="container" layout:fragment="content">
 
-<h1>Emprunts</h1>
+    <h1>Emprunts</h1>
 
-<div>
+    <div class="border container p-3">
 
-    <form th:action="@{./create}" method="post" action="#">
-        <select th:name="nomUsager">
-            <option value="null">Usager</option>
-            <option th:each="usager : ${usagers}" th:value="${usager.getNom()}" th:text="${usager.getNom()}"/>
-        </select>
+        <form th:action="@{./create}" method="post" action="#" class="p-2">
+            <select th:name="nomUsager">
+                <option value="null">Usager</option>
+                <option th:each="usager : ${usagers}" th:value="${usager.getNom()}" th:text="${usager.getNom()}"/>
+            </select>
 
-        <br/>
-        <br/>
+            <br/>
+            <br/>
 
-        <select th:name="nomOeuvre">
-            <option value="null">Oeuvre</option>
-            <option th:each="oeuvre : ${oeuvresDispo}" th:value="${oeuvre.getNomOeuvre()}" th:text="${oeuvre.getNomOeuvre()}"/>
-        </select>
+            <select th:name="nomOeuvre">
+                <option value="null">Oeuvre</option>
+                <option th:each="oeuvre : ${oeuvresDispo}" th:value="${oeuvre.getNomOeuvre()}" th:text="${oeuvre.getNomOeuvre()}"/>
+            </select>
 
-        <br/>
-        <br/>
+            <br/>
+            <br/>
 
-        <input type="submit" value="Emprunter">
-    </form>
+            <input type="submit" value="Emprunter">
+        </form>
 
-</div>
-<div>
-    <table class="table">
-        <thead>
+    </div>
+    <div class="p-3">
+        <table class="table">
+            <thead>
             <th>Oeuvre</th>
             <th>Usager</th>
             <th>Action</th>
-        </thead>
-        <tr th:each="emprunt : ${emprunts}">
-            <td th:text="${emprunt.getExemplaire().getOeuvre().getNomOeuvre()}"/>
-            <td th:text="${emprunt.getUsager().getNom()}"></td>
-            <td>
-                <form th:action="@{./rendre}" method="post">
-                    <input type="hidden" th:name="nomUsager" th:value="${emprunt. getUsager().getNom()}">
-                    <input type="hidden" th:name="idExemplaire" th:value="${emprunt.getExemplaire().getIdExemplaire()}">
+            </thead>
+            <tr th:each="emprunt : ${emprunts}">
+                <td th:text="${emprunt.getExemplaire().getOeuvre().getNomOeuvre()}"/>
+                <td th:text="${emprunt.getUsager().getNom()}"></td>
+                <td>
+                    <form th:action="@{./rendre}" method="post">
+                        <input type="hidden" th:name="nomUsager" th:value="${emprunt. getUsager().getNom()}">
+                        <input type="hidden" th:name="idExemplaire" th:value="${emprunt.getExemplaire().getIdExemplaire()}">
 
-                    <input type="submit" value="rendre">
-                </form>
-            </td>
-        </tr>
-    </table>
-</div>
+                        <input type="submit" value="rendre">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </div>
 </html>

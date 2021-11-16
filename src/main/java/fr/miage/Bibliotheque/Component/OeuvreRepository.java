@@ -16,5 +16,8 @@ public interface OeuvreRepository extends JpaRepository<Oeuvre, Long>{
     @Query("select  o from Oeuvre o where o.estPerimee=false")
     public List<Oeuvre> findAllByEstPerimeeFalse();
 
+    @Query("select  o from Oeuvre o where o.estPerimee=true")
+    public List<Oeuvre> findAllByEstPerimeeTrue();
+
 
 }

@@ -22,8 +22,12 @@ public class OeuvreController {
     public String getAllOeuvres(Model model){
         model.addAttribute("oeuvre", new Oeuvre());
 
-        Iterable<Oeuvre> allOeuvres = or.findAll();
+        Iterable<Oeuvre> allOeuvres = or.findAllByEstPerimeeFalse();
+        Iterable<Oeuvre> oeuvresPerimees = or.findAllByEstPerimeeTrue();
+
         model.addAttribute("oeuvres", allOeuvres);
+        model.addAttribute("oeuvresPerimees", oeuvresPerimees);
+
 
         return "oeuvres";
     }
@@ -38,12 +42,17 @@ public class OeuvreController {
 
             if(existOeuvre == null)
                 or.save(oeuvre);
+            else
+                model.addAttribute("errorMsg", "Erreur, ce nom d'oeuvre est déjà enregistré.");
 
         }
 
-        Iterable<Oeuvre> allOeuvres = or.findAll();
+        Iterable<Oeuvre> allOeuvres = or.findAllByEstPerimeeFalse();
+        Iterable<Oeuvre> oeuvresPerimees = or.findAllByEstPerimeeTrue();
+
 
         model.addAttribute("oeuvres", allOeuvres);
+        model.addAttribute("oeuvresPerimees", oeuvresPerimees);
 
         return "oeuvres";
     }
@@ -59,8 +68,11 @@ public class OeuvreController {
             or.save(oeuvre2delete);
         }
 
-        Iterable<Oeuvre> allOeuvres = or.findAll();
+        Iterable<Oeuvre> allOeuvres = or.findAllByEstPerimeeFalse();
+        Iterable<Oeuvre> oeuvresPerimees = or.findAllByEstPerimeeTrue();
+
         model.addAttribute("oeuvres", allOeuvres);
+        model.addAttribute("oeuvresPerimees", oeuvresPerimees);
 
         return "oeuvres";
     }

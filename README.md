@@ -20,7 +20,7 @@ Les dépendances utilisées sont :
 Ce package contient les Repository des différents objets de notre application. C'est dans ces classes que sont définies les méthodes pour effectuer des requêtes en base de données.
 
 ### Controller
-Ce package contient les controleurs de l'applicaiton. Ce sont eux qui vont effectuer la vérification et le traitement des données envoyés par les formulaires dans les vues.
+Ce package contient les controleurs de l'application. Ce sont eux qui vont effectuer la vérification et le traitement des données envoyées par les formulaires dans les vues.
 
 ### Entity
 Ce package contient les objets métier de notre application, c'est à dire les entités qui seront stockées dans la base de données.

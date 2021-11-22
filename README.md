@@ -29,4 +29,4 @@ Ce package contient les objets métiers de notre application, c'est à dire les 
 C'est dans ce package que les ressources statiques du site doivent être définies, comme les fichiers css, javaScript ou les images.
 
 ### templates
-Enfin, ce dernier package va contenir les pages du site web
+Enfin, ce dernier package va contenir les pages du site web.

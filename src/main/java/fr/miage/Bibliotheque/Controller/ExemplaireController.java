@@ -63,16 +63,6 @@ public class ExemplaireController {
         return "exemplaires";
     }
 
-    @PostMapping("/toUpdate")
-    public String toUpdateExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, Model model){
-
-        Exemplaire exemplaire = er.findById(idExemplaire).orElse(null);
-
-        model.addAttribute("exemplaire", exemplaire);
-
-        return "updateExemplaire";
-    }
-
     @PostMapping("/update")
     public String modifierExemplaire(@RequestParam(value = "idExemplaire") Long idExemplaire, Model model){
 

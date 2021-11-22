@@ -23,7 +23,7 @@ Ce package contient les Repository des différents objets de notre application. 
 Ce package contient les controleurs de l'application. Ce sont eux qui vont effectuer la vérification et le traitement des données envoyées par les formulaires dans les vues.
 
 ### Entity
-Ce package contient les objets métier de notre application, c'est à dire les entités qui seront stockées dans la base de données.
+Ce package contient les objets métiers de notre application, c'est à dire les entités qui seront stockées dans la base de données.
 
 ### static
 C'est dans ce package que les ressources statiques du site doivent être définies, comme les fichiers css, javaScript ou les images.

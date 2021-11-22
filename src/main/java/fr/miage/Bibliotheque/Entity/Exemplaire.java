@@ -19,7 +19,6 @@ public class Exemplaire implements Serializable {
 
     private String etat;
     private boolean estDispo = true;
-    private boolean estRetire = false;
 
     @ManyToOne
     private Oeuvre oeuvre;
@@ -51,14 +50,6 @@ public class Exemplaire implements Serializable {
 
     public void setEstDispo(boolean estDispo) {
         this.estDispo = estDispo;
-    }
-
-    public boolean isEstRetire() {
-        return estRetire;
-    }
-
-    public void setEstRetire(boolean estRetire) {
-        this.estRetire = estRetire;
     }
 
     public Oeuvre getOeuvre() {

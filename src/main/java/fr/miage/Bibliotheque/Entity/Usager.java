@@ -16,13 +16,14 @@ import java.io.Serializable;
 @NoArgsConstructor //Create empty constructor
 public class Usager implements Serializable {
 
-    /*@Id
-    @GeneratedValue
-    private long idUser;*/
-
     @Id
     private String nom;
     private String prenom;
+
+    public Usager(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
 
     public String getNom() {
         return nom;
